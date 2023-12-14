@@ -5,13 +5,14 @@ public class BulletBarrierCollisionHandler extends CollisionHandler {
             if (checkCollision(bullet, barrier)) {
                 bullet.setActive(false);
                 ((Barrier)barrier).takeHit();
+                soundManager.playBarrierHitSound();
             }
         } else if (successor != null) {
             successor.handleCollision(bullet, barrier);
         }
     }
 
-    public BulletBarrierCollisionHandler(ScoreBoard scoreBoard) {
-        super(scoreBoard);
+    public BulletBarrierCollisionHandler(ScoreBoard scoreBoard, SoundManager soundManager) {
+        super(scoreBoard, soundManager);
     }
 }

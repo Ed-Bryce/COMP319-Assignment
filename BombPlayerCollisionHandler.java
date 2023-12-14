@@ -5,13 +5,14 @@ public class BombPlayerCollisionHandler extends CollisionHandler {
             if (checkCollision(bomb, player)) {
                 bomb.setActive(false);
                 ((Player)player).loseLife();
+                soundManager.playPlayerHitSound();
             }
         } else if (successor != null) {
             successor.handleCollision(bomb, player);
         }
     }
 
-    public BombPlayerCollisionHandler(ScoreBoard scoreBoard) {
-        super(scoreBoard);
+    public BombPlayerCollisionHandler(ScoreBoard scoreBoard, SoundManager soundManager) {
+        super(scoreBoard, soundManager);
     }
 }

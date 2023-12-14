@@ -15,6 +15,7 @@ public class Game {
     private List<Bomb> bombs;
     private CollisionHandler collisionChain;
     private ScoreBoard scoreBoard;
+    private SoundManager soundManager;
     private Random random;
 
     private Game() {
@@ -65,10 +66,10 @@ public class Game {
     }
 
     private void initializeCollisionChain() {
-        collisionChain = new BulletEnemyCollisionHandler(scoreBoard);
-        CollisionHandler bulletBarrierHandler = new BulletBarrierCollisionHandler(scoreBoard);
-        CollisionHandler bombBarrierHandler = new BombBarrierCollisionHandler(scoreBoard);
-        CollisionHandler bombPlayerHandler = new BombPlayerCollisionHandler(scoreBoard);
+        collisionChain = new BulletEnemyCollisionHandler(scoreBoard, soundManager);
+        CollisionHandler bulletBarrierHandler = new BulletBarrierCollisionHandler(scoreBoard, soundManager);
+        CollisionHandler bombBarrierHandler = new BombBarrierCollisionHandler(scoreBoard, soundManager);
+        CollisionHandler bombPlayerHandler = new BombPlayerCollisionHandler(scoreBoard, soundManager);
         collisionChain.setSuccessor(bulletBarrierHandler);
         bulletBarrierHandler.setSuccessor(bombBarrierHandler);
         bombBarrierHandler.setSuccessor(bombPlayerHandler);
@@ -118,6 +119,7 @@ public class Game {
                     break;
                 case ' ':
                     bullets.add(new Bullet(player.getX(), player.getY(), 1, 1));
+                    soundManager.playBulletFiredSound();
                 default: 
                     break;
             }
@@ -173,6 +175,7 @@ public class Game {
             }
 
             if (checkGameOver()) {
+                soundManager.playGameOverSound();
                 HighScoreManager highScoreManager = HighScoreManager.getInstance();
                 highScoreManager.checkAndUpdateHighScore(scoreBoard.getScore());
                 running = false;

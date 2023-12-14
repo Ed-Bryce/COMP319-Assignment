@@ -7,13 +7,14 @@ public class BulletEnemyCollisionHandler extends CollisionHandler {
                 bullet.setActive(false);
                 enemy.setActive(false);
                 scoreBoard.addScore(10);
+                soundManager.playEnemyHitSound();
             }
         } else if (successor != null) {
             successor.handleCollision(bullet, enemy);
         }
     }
 
-    public BulletEnemyCollisionHandler(ScoreBoard scoreBoard) {
-        super(scoreBoard);
+    public BulletEnemyCollisionHandler(ScoreBoard scoreBoard, SoundManager soundManager) {
+        super(scoreBoard, soundManager);
     }
 }
