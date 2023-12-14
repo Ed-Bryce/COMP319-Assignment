@@ -1,8 +1,15 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 public class InputHandler implements KeyListener{
+    private static boolean leftPressed;
+    private static boolean rightPressed;
+    private static boolean spacePressed;
+
+    /**
+     * Returns input from player
+     * @return char, a, d or space, returns N of no key pressed
+     */
     public static char getInput() {
         if (leftPressed) {
             return 'a';
@@ -29,14 +36,8 @@ public class InputHandler implements KeyListener{
 
     }
 
-    private static boolean leftPressed;
-    private static boolean rightPressed;
-    private static boolean spacePressed;
-
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {

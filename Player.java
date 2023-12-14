@@ -1,45 +1,71 @@
 public class Player extends GameObject {
-    // Player-specific attributes...
     private int gridWidth;
     private int lives;
 
+    /**
+     * Player Constructor
+     * @param x x coord
+     * @param y y coord
+     * @param width object width
+     * @param height object height
+     * @param gridHeight hight of the game grid
+     */
     public Player(int x, int y, int width, int height, int gridWidth) {
-        super(x, y, width, height, 'P');  // 'P' to represent the Player
+        super(x, y, width, height, 'P');
         this.gridWidth = gridWidth;
         this.lives = 3;
     }
 
-    public void loseLife() {
+    /**
+     * Reduces life count by 1
+     */
+    public final void loseLife() {
         lives--;
     }
 
-    public int getLives() {
+    /**
+     * Gets current amount of lives
+     * @return int, current lives
+     */
+    public final int getLives() {
         return lives;
     }
 
-    public void moveLeft() {
+    /**
+     * Moves the player left by 1
+     */
+    public final void moveLeft() {
         x = Math.max(0, x - 1);
     }
 
-    public void moveRight() {
+    /**
+     * Moves the player right by 1
+     */
+    public final void moveRight() {
         x = Math.min(gridWidth - width, x + 1);
     }
 
-    public int getX(){
+    /**
+     * Gets the current x coord
+     * @return int, x coord
+     */
+    public final int getX(){
         return x;
     }
 
-    public int getY(){
+    /**
+     * Gets the current y coord
+     * @return int, y coord
+     */
+    public final int getY(){
         return y;
     }
 
     @Override
-    public void update() {}
+    public final void update() {}
 
     @Override
-    public void render(char[][] grid) {
+    public final void render(char[][] grid) {
         super.render(grid);
     }
-
-    // Additional methods...
 }

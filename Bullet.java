@@ -1,18 +1,24 @@
 public class Bullet extends GameObject {
+    /**
+     * Bullet constructor
+     * @param x x coord
+     * @param y y coord
+     * @param width object width
+     * @param height object height
+     */
     public Bullet(int x, int y, int width, int height) {
-        super(x, y, width, height, '^');  // Represented by '^'
+        super(x, y, width, height, '^');
     }
 
     @Override
-    public void update() {
-        if (y > 0) y -= 1;  // Move up
-        else active = false;  // Deactivate the bullet if it reaches the top
+    public final void update() {
+        if (y > 0) y -= 1;
+        else active = false; 
     }
 
     @Override
-    public void render(char[][] grid) {
+    public final void render(char[][] grid) {
         if (active) super.render(grid);
     }
 
-    // Additional methods...
 }

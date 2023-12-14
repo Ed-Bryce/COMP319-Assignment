@@ -1,9 +1,8 @@
 public class BulletEnemyCollisionHandler extends CollisionHandler {
     @Override
-    public void handleCollision(GameObject bullet, GameObject enemy) {
+    public final void handleCollision(GameObject bullet, GameObject enemy) {
         if (bullet instanceof Bullet && enemy instanceof Enemy) {
             if (checkCollision(bullet, enemy)) {
-                System.out.println("bullet enemy collision");
                 bullet.setActive(false);
                 enemy.setActive(false);
                 scoreBoard.addScore(10);
@@ -13,7 +12,11 @@ public class BulletEnemyCollisionHandler extends CollisionHandler {
             successor.handleCollision(bullet, enemy);
         }
     }
-
+    /**
+     * BulletEnemyCollisionHandler constructor
+     * @param scoreBoard active scoreboard instance
+     * @param soundManager active soundmanager instance
+     */
     public BulletEnemyCollisionHandler(ScoreBoard scoreBoard, SoundManager soundManager) {
         super(scoreBoard, soundManager);
     }

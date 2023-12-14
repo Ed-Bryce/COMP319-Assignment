@@ -18,6 +18,9 @@ public class Game {
     private SoundManager soundManager;
     private Random random;
 
+    /**
+     * Contains all logic to be run at game start
+     */
     private Game() {
         running = true;
         grid = new char[gridHeight][gridWidth];
@@ -32,6 +35,13 @@ public class Game {
         initializeCollisionChain();
     }
 
+    /**
+     * Checks gameOver conditions:
+     * If an active enemy reaches level of barriers then returns true,
+     * If the player has 0 lives remaining then returns true,
+     * Else returns false
+     * @return boolean
+     */
     private boolean checkGameOver() {
         int barrierLevel = barriers.get(0).getY();
         for (Enemy enemy : enemies) {
@@ -45,10 +55,17 @@ public class Game {
         return false;
     }
 
+    /**
+     * Gets the current active game instance
+     * @return
+     */
     public static Game getInstance() {
         return instance;
     }
 
+    /**
+     * Populates the enemies array with enemies
+     */
     private void initializeEnemies() {
         enemies.clear();
         for (int i = 0; i < 5; i++) {
@@ -57,6 +74,9 @@ public class Game {
         }
     }
 
+    /**
+     * Populates the barriers array with barriers
+     */
     private void initializeBarriers() {
         barriers = new ArrayList<>();
         int barrierSpacing = gridWidth / 5;
@@ -65,6 +85,9 @@ public class Game {
         }
     }
 
+    /**
+     * Sets each successor to create the collision tree
+     */
     private void initializeCollisionChain() {
         collisionChain = new BulletEnemyCollisionHandler(scoreBoard, soundManager);
         CollisionHandler bulletBarrierHandler = new BulletBarrierCollisionHandler(scoreBoard, soundManager);
@@ -75,6 +98,10 @@ public class Game {
         bombBarrierHandler.setSuccessor(bombPlayerHandler);
     }
 
+    /**
+     * Checks if all enemies in the current enemies array are set to inactive.
+     * @return boolean
+     */
     private boolean areAllEnemiesInactive() {
         for (Enemy enemy : enemies) {
             if (enemy.isActive()) {
@@ -84,6 +111,9 @@ public class Game {
         return true;
     }
 
+    /**
+     * Clears the render grid of all gameObject symbols
+     */
     private void clearGrid() {
         for (int i = 0; i < gridHeight; i++) {
             for (int j = 0; j < gridWidth; j++) {
@@ -92,6 +122,10 @@ public class Game {
         }
     }
 
+    /**
+     * Outputs any game text.
+     * Creates a render grid to display gameObject symbols.
+     */
     private void renderGrid() {
         System.out.println("        SPACE INVADERS\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Score: " + scoreBoard.getScore());
@@ -105,6 +139,11 @@ public class Game {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
+    /**
+     * Main game loop
+     * All code contained is run each game loop.
+     * Contains game logic while the game is running.
+     */
     public void start() {    
         while (running) {
             clearGrid();
