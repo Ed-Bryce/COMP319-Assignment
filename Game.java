@@ -28,6 +28,7 @@ public class Game {
         bullets = new ArrayList<>();
         bombs = new ArrayList<>();
         scoreBoard = new ScoreBoard();
+        soundManager = new SoundManager();
         random = new Random();
         initializeEnemies();
         player = (Player) GameFactory.createObject("Player", gridWidth / 2, gridHeight - 2, 1, 1, gridWidth, gridHeight);

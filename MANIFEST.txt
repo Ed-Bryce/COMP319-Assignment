@@ -1,0 +1,4 @@
+I have included a text rendering system that I used to test the game logic.
+If you wish to use this and have the player move and shoot then uncomment the given code in inputHandler.java
+
+Main-Class: Main.java
